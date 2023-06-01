@@ -1,19 +1,20 @@
-const {nanoid} = require('nanoid');
+// fungis ini mengatur semua logik di node js
+
+const { nanoid } = require('nanoid');
 const notes = require('./notes');
 
+
 const addNoteHandler = (request, h) => {
-    const {title, tags, body} = request.payload;
-
-
+    const { title, tags, body } = request.payload;
     const id = nanoid(16);
-    const createdAt = newData().toISOString();
-    const updtaedAt = createdAt;
+    const createdAt = new Date().toISOString();
+    const updatedAt = createdAt;
+
 
     const newNote = {
-        title, tags, body, id, createdAt, updtaedAt,
+        title, tags, body, id, createdAt, updatedAt,
     };
     notes.push(newNote);
-
 
     const isSuccess = notes.filter((note) => note.id === id).length > 0;
 
@@ -22,7 +23,7 @@ const addNoteHandler = (request, h) => {
             status: 'success',
             message: 'Catatan berhasil ditambahkan',
             data: {
-                noteId: id,
+            noteId: id,
             },
         });
         response.code(201);
@@ -30,9 +31,40 @@ const addNoteHandler = (request, h) => {
     }
 
     const response = h.response({
-        status:'fail',
-        message: 'Catatan gagal ditambahkan',
+        status: 'fail',
+        message: 'Catatan Gagal Ditambahkan',
     });
     response.code(500);
+    return response;
 };
-module.exports = { addNoteHandler };
+
+const getAllNotesHandler = () => ({
+    status: 'success',
+    data: {
+        notes,
+    },
+});
+
+const getNoteByIdHandler = (request, h) => {
+    const { id } = request.params;
+
+    const note = notes.filter((n) => n.id === id)[0];
+
+    if (note !== undefined) {
+        return {
+          status: 'success',
+          data: {
+            note,
+          },
+        };
+      }
+      const response = h.response({
+        status: 'fail',
+        message: 'Catatan tidak ditemukan',
+      });
+      response.code(404);
+      return response;
+    };
+
+
+module.exports = { addNoteHandler,getAllNotesHandler,getNoteByIdHandler };

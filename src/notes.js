@@ -1,3 +1,5 @@
-const note = [];
+const notes = [];
 
 module.exports = notes;
+
+
