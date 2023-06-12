@@ -36,14 +36,14 @@ module.exports = function (server) {
     server.route({
         method: 'GET',
        
-       path: '/calculadora/sub/{num1}-{num2}',
+       path: '/calculator/sub/{num1}-{num2}',
         handler: function (request, h) {
 
             const num1 = parseInt(request.params.num1);
             const num2 = parseInt(request.params.num2);
 
             var data = {
-                resposta: num1 - num2
+                answer: num1 - num2
             };
     
             return data;
@@ -54,14 +54,14 @@ module.exports = function (server) {
     server.route({
         method: 'GET',
        
-       path: '/calculadora/multi/{num1}*{num2}',
+       path: '/calculator/multi/{num1}*{num2}',
         handler: function (request, h) {
 
             const num1 = parseInt(request.params.num1);
             const num2 = parseInt(request.params.num2);
 
             var data = {
-                resposta: num1 * num2
+                answer: num1 * num2
             };
     
             return data;
@@ -72,14 +72,14 @@ module.exports = function (server) {
     server.route({
         method: 'GET',
        
-       path: '/calculadora/div/{num1}/{num2}',
+       path: '/calculator/div/{num1}/{num2}',
         handler: function (request, h) {
 
             const num1 = parseInt(request.params.num1);
             const num2 = parseInt(request.params.num2);
 
             var data = {
-                resposta: num1 / num2
+                answer: num1 / num2
             };
     
             return data;
