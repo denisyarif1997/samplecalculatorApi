@@ -9,8 +9,7 @@ const server = Hapi.Server({
 });
 
 //routes
-require('./routes')(server);
-
+require('./routes/routes')(server);
 //start server
 const init = async () => {
   await server.start();
